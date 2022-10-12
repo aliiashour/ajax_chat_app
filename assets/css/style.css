@@ -1,0 +1,46 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.register_form_container{
+    margin-top: 100px;
+}
+
+.register_form_container form .text-center span a{
+    color: #3294e9;
+    text-decoration: none;
+    cursor: pointer;
+}
+.panel > div{
+    padding: 5px;
+}
+.panel .panel-heading{
+    background-color: #536bce;
+    color: white;
+    padding: 5px;
+}
+.panel .panel-body > .post{
+    padding: 5px;
+}
+.panel .panel-body > .post div:first-of-type .img-fluid{
+    width: 100%;
+    height: 220px;
+}
+.panel .panel-body > .user{
+    padding: 5px;
+}
+
+.panel .panel-body > .user div:first-of-type .img-fluid{
+    width: 100%;
+    height: 130px;
+}
+.panel .panel-body > .user div:last-of-type h5{
+    margin-bottom: 32px;
+}
+.changecolor{
+    background-color: #c6702c;
+}
+.changecolor:hover{
+    background-color: #c6702c !important;
+}
