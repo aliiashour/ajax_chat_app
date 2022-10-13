@@ -33,37 +33,13 @@
                 <thead>
                     <tr>
                         <th scope="col">Username</th>
+                        <th scope="col">Status</th>
                         <th scope="col">Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <?php
-                    
-                        $q = 'SELECT * FROM login WHERE login_user_id != :user_id' ; 
-                        $stmt = $con->prepare($q) ; 
-                        $stmt->execute(array(
-                            ':user_id' => $_SESSION['login_user_id']
-                        )) ; 
-                        $count = $stmt->rowCount() ;
-                        $output = '' ; 
-                        while ($count-- > 0) {
-                            $res = $stmt->fetch() ; 
-                            $output .='<tr>
-                                            <td>
-                                                '.$res['login_user_name'].'
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-info">start chat</button>
-                                            </td>
-                                        </tr>' ; 
-                        }
-                        if($output !=''){
-                            echo $output ; 
-                        }else{
-                            echo "Sorry There is no users" ; 
-                        }
-                    ?>
+                <tbody id="users_data">
                 </tbody>
+                
             </table>
         </div>
         <div class="col-12 col-sm-4 col-md-4 mt-5">
@@ -71,14 +47,66 @@
             <hr>
             users
         </div>
+        <div id="user_details">
+            <div id="user_model_details"></div>
+        </div>
     </div>
 </div>
-
-
-<script>
-    console.log("test") ; 
-</script>
 
 <?php
     include_once "./include/footer.php" ; 
 ?>
+<script>
+    $(document).ready(function(){
+        
+        setInterval(function(){  
+            update_last_activity() ;    
+            fetch_users_data() ; 
+        },1000);
+
+        //get all user data
+        function fetch_users_data(){
+            $.ajax({
+                url:"fetch_users_data.php",
+                success:function(data){
+                    $("#users_data").html(data) ; 
+                }
+            });
+        }
+        
+        function update_last_activity(){
+            $.ajax({
+                url:"update_last_activity.php",
+                success:function(data){
+                    // $("#users_data").html(data) ; 
+                }
+            });
+        }
+
+
+        function make_chat_box(to_user_id, to_user_name){
+            var modal_content = '<div id="user_dialog_'+to_user_id+'" class="user_dialog" title="Chating '+to_user_name+'">';
+            modal_content += '<div style="height:400px; border:1px solid #CCC; overflow-y:scroll; margin-bottom:24px;padding:16px;" class="chat_history" data-to_user_id="'+to_user_id+'" id="chat_history_'+to_user_id+'">' ;
+            modal_content += '</div>' ; 
+            modal_content +='<div class="form-group">' ;
+            modal_content += '<textarea name="chat_message_'+to_user_id+'" id="chat_message_'+to_user_id+'" class="form-control"></textarea>' ; 
+            modal_content += '</div><div class="form-group" align="right">' ; 
+            modal_content +='<button type="button" name="send_chat" id="'+to_user_id+'" class="btn btn-primary">Send</button></div></div>' ; 
+            $('#user_model_details').html(modal_content) ; 
+        }
+        $(document).on('click', '.start_chat', function(){
+            var to_user_id = $(this).data('to_user_id') ; 
+            var to_user_name = $(this).data('to_user_name') ; 
+            console.log(to_user_id + to_user_name) ; 
+            make_chat_box(to_user_id, to_user_name) ; 
+            $("#user_dialog_"+to_user_id).dialog({
+                autoOpen:false,
+                width:400
+            });
+            $("#user_dialog_"+to_user_id).dialog('open') ; 
+        })
+
+    })
+</script>
+    </tbody>
+</html>
