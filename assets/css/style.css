@@ -44,3 +44,16 @@
 .changecolor:hover{
     background-color: #c6702c !important;
 }
+.iSend{
+    background-color: rgb(79, 140, 79);
+    color: #FFF;
+    border-radius:5px ;
+    margin: 2px 0 0 2px;
+}
+
+.iRecev{
+    background-color: rgb(67, 64, 60);
+    color: #FFF;
+    border-radius:5px ;
+    margin: 2px 0 0 2px;
+}
