@@ -57,3 +57,6 @@
     border-radius:5px ;
     margin: 2px 0 0 2px;
 }
+.status:empty{
+    display:inline-block !important;
+}
