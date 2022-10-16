@@ -20,6 +20,7 @@
                     $output .= '<div class="row justify-content-start"><div class="col-8 iRecev">'.$res['message_content'].'</div></div>' ;
                 }
             }
+            // update_message_status($_REQUEST['to_user_id'], $con) ; //
         }else{
             $output = '<class ="row"><div class="col-12 text-center alert alert-danger">there is no message yet.</div></div>' ;
         }

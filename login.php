@@ -61,6 +61,9 @@
                     <label for="user_password" class="form-label">Password</label>
                     <input type="password" class="form-control" name="user_password" required>
                 </div>
+                <div class="mb-3 form-check text-center">
+                    <span>you already have an account?<a href="./register.php">signUp</a></span>
+                </div>
                 <!-- <button type="submit" class="btn btn-primary" id="login_button">LogIN</button> -->
                 
                 <div class="mb-3">
